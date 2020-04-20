@@ -10,29 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @CrossOrigin
+@RequestMapping("/api")
 public class LoginController {
     @Autowired
     TeacherService teacherService;
 
     WebStruct webStruct = new WebStruct();
 
-    @RequestMapping("/api/getCurrentUser")
+    @RequestMapping("getCurrentUser")
     @ResponseBody
     public WebStruct getCurrentUser(){
 
         webStruct.setData("guest");
-        webStruct.setSuccess(false);
+        webStruct.setSuccess(true);
 //        result.put("code",0);//这行报错因为去除必须登录后上下两个相同了
 //        result.put("data","guest");
 //        result.put("message","");
 //        result.put("success",true);
 //        result.put("total",null);
 
-        System.out.println(webStruct.toString() +"get");
+        System.out.println(webStruct +"get");
         return webStruct;
     }
 
-    @RequestMapping("/api/login")
+    @RequestMapping("login")
     @ResponseBody
     public WebStruct login(@Param("username") String  username,@Param("password") String  password){
         //询问mapper
@@ -45,7 +46,7 @@ public class LoginController {
 //            result.put("message","");
 //            result.put("success",true);
 //            result.put("total",null);
-            System.out.println(webStruct.toString()+"get");
+            System.out.println(webStruct+"get");
             return webStruct;
         }
 //
@@ -54,7 +55,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping("/api/logout")
+    @RequestMapping("logout")
     public String logout(){
         return "redirect:http://localhost:8080/";
     }

@@ -1,34 +1,27 @@
 package com.chd.score.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.chd.score.demo.bean.ChdCollege;
+import com.chd.score.demo.bean.WebStruct;
+import com.chd.score.demo.service.CollegeService;
 import com.chd.score.demo.service.TeacherService;
+import com.chd.score.demo.util.FastJsonTools;
+import com.chd.score.demo.webbean.CollegeSchema;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @CrossOrigin
 public class DemoController {
-
-//    {"code":0,"data":"guest","message":"","success":true,"total":null}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//    chdCollege/select
 
 
 
@@ -111,6 +104,9 @@ public class DemoController {
         System.out.println(result.toJSONString()+"post");
         return result.toJSONString();
     }
+
+//    {"code":0,"data":"guest","message":"","success":true,"total":null}
+///api/chdCollege/schema
 
 
 
