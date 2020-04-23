@@ -13,6 +13,8 @@ public class ChdCollege implements Serializable {
     private String collegeId;
     @Column
     private String collegeName;
+    @Column
+    private String isCreate;
 
     public String getCollegeId() {
         return collegeId;
@@ -28,5 +30,13 @@ public class ChdCollege implements Serializable {
 
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
+    }
+
+    public String getIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(String isCreate) {
+        this.isCreate = isCreate;
     }
 }

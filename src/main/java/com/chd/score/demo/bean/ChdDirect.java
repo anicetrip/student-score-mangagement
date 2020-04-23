@@ -10,23 +10,15 @@ public class ChdDirect implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    @Column
-    private String directId;
+    private String isCreate;
     @Column
     private String directName;
     @Column
     private String mainId;
     @Column
     private String collegeId;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Column
+    private String directId;
 
     public String getDirectId() {
         return directId;
@@ -58,5 +50,13 @@ public class ChdDirect implements Serializable {
 
     public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;
+    }
+
+    public String getIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(String isCreate) {
+        this.isCreate = isCreate;
     }
 }

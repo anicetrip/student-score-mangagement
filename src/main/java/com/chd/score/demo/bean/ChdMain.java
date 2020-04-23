@@ -10,21 +10,13 @@ public class ChdMain implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    @Column
     private String mainId;
     @Column
     private String collegeId;
     @Column
     private String mainName;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Column
+    private String isCreate;
 
     public String getMainId() {
         return mainId;
@@ -48,5 +40,13 @@ public class ChdMain implements Serializable {
 
     public void setMainName(String mainName) {
         this.mainName = mainName;
+    }
+
+    public String getIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(String isCreate) {
+        this.isCreate = isCreate;
     }
 }

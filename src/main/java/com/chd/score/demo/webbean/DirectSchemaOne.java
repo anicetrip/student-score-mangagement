@@ -1,24 +1,17 @@
 package com.chd.score.demo.webbean;
 
-import com.chd.score.demo.bean.ChdCollege;
+import com.chd.score.demo.bean.ChdDirect;
+import com.chd.score.demo.bean.ChdMain;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class CollegeSchema implements Serializable {
-    /**
-     * code : 0
-     * data : [{"collegeId":"10","collegeName":"控制"},{"collegeId":"11`","collegeName":"土木"}]
-     * message :
-     * success : true
-     * total : 31461
-     */
-
+public class DirectSchemaOne implements Serializable {
     private int code=0;
     private String message;
     private boolean success=true;
     private String  total;
-    private List<ChdCollege> data;
+    private ChdDirect data;
+
 
     public int getCode() {
         return code;
@@ -52,30 +45,11 @@ public class CollegeSchema implements Serializable {
         this.total = total;
     }
 
-    public List<ChdCollege> getData() {
+    public ChdDirect getData() {
         return data;
     }
 
-    public void setData(List<ChdCollege> data) {
+    public void setData(ChdDirect data) {
         this.data = data;
     }
-
-//    {
-//        "code":0,
-//        "data":
-//        [{
-//            "collegeId":"10",
-//            "collegeName":"控制",
-//    },{
-//        "collegeId":"11`",
-//        "collegeName":"土木",
-//    }
-//
-//        ],
-//    "message":"",
-//            "success":true,
-//            "total":31461
-//    }
-
-
 }

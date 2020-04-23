@@ -29,7 +29,7 @@ public class LoginController {
 //        result.put("success",true);
 //        result.put("total",null);
 
-        System.out.println(webStruct +"get");
+//        System.out.println(webStruct +"get");
         return webStruct;
     }
 
@@ -46,7 +46,7 @@ public class LoginController {
 //            result.put("message","");
 //            result.put("success",true);
 //            result.put("total",null);
-            System.out.println(webStruct+"get");
+//            System.out.println(webStruct+"get");
             return webStruct;
         }
 //

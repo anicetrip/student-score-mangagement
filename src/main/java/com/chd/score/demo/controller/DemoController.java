@@ -90,7 +90,7 @@ public class DemoController {
         JSONObject  result = new JSONObject();
         result.put("id",id);
         result.put("title",title);
-        System.out.println(result.toJSONString()+"get");
+//        System.out.println(result.toJSONString()+"get");
         return result.toJSONString();
     }
 
@@ -101,7 +101,7 @@ public class DemoController {
         result.put("title",title);
         result.put("id",id);
         result.put("money",(int)9999999);
-        System.out.println(result.toJSONString()+"post");
+//        System.out.println(result.toJSONString()+"post");
         return result.toJSONString();
     }
 
