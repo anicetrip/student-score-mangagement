@@ -87,22 +87,22 @@ public class DirectController {
      * @param json
      * @return
      */
+    //TODO
     @RequestMapping(value = "update", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
     public String  chdDirectUpdate(@RequestParam("keys") String[] keys, @RequestBody String json){
-//        //解析json
+        //解析json
         Map map = FastJsonTools.stringToCollect(json);
-//        ChdDirect chdDirect = new ChdDirect();
-//        chdDirect.setDirectName((String) map.get("mainName"));
-//        chdDirect.setCollegeId((String) map.get("collegeId"));
-//        int data = mainService.chdMainUpdate(keys,chdMain);
-//        WebStruct webStruct = new WebStruct();
-//        webStruct.setSuccess(true);
-//        webStruct.setTotal(null);
-//        webStruct.setData(data+"");
-//        webStruct.setTotal(null);
+        ChdDirect chdDirect = new ChdDirect();
+        chdDirect.setDirectName((String) map.get("directName"));
+        int data = directService.chdDirectUpdate(keys,chdDirect);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(data+"");
+        webStruct.setTotal(null);
 
-//        return FastJsonTools.toJSONString(webStruct);
-        return null;
+        return FastJsonTools.toJSONString(webStruct);
+
     }
 }

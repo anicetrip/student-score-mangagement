@@ -10,7 +10,7 @@ public class ChdClass implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String isCreate;
     @Column
     private String classId;
     @Column
@@ -20,12 +20,12 @@ public class ChdClass implements Serializable {
     @Column
     private String directId;
 
-    public String getId() {
-        return id;
+    public String getIsCreate() {
+        return isCreate;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIsCreate(String isCreate) {
+        this.isCreate = isCreate;
     }
 
     public String getClassId() {

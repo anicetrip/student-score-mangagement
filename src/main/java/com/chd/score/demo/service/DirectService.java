@@ -10,4 +10,6 @@ public interface DirectService {
     PageInfo<ChdDirect> chdDirectSelect(int page, int pageSize, ChdDirect chdDirect);
 
     ChdDirect chdDirectInsert(ChdDirect chdDirect);
+
+    int chdDirectUpdate(String[] keys, ChdDirect chdDirect);
 }

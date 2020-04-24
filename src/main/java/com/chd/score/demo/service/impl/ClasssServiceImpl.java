@@ -1,34 +1,35 @@
 package com.chd.score.demo.service.impl;
 
+import com.chd.score.demo.bean.ChdClass;
 import com.chd.score.demo.bean.ChdCollege;
 import com.chd.score.demo.bean.ChdDirect;
 import com.chd.score.demo.bean.ChdMain;
+import com.chd.score.demo.mapper.ClassMapper;
 import com.chd.score.demo.mapper.CollegeMapper;
-import com.chd.score.demo.mapper.DirectMapper;
 import com.chd.score.demo.mapper.MainMapper;
-import com.chd.score.demo.service.DirectService;
+import com.chd.score.demo.service.ClasssService;
 import com.chd.score.demo.util.PasswordGenerator;
 import com.chd.score.demo.webbean.Schema;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
-public class DirectServiceImpl implements DirectService {
+public class ClasssServiceImpl implements ClasssService {
     @Autowired
     CollegeMapper collegeMapper;
     @Autowired
     MainMapper mainMapper;
     @Autowired
-    DirectMapper directMapper;
+    ClassMapper classMapper;
+
 
     @Override
-    public Schema chdDirectSchema() {
+    public Schema chdClasssSchema() {
         //第一个参数组DataSchemaBean
         Schema.DataBean.DataSchemaBean data1 = new Schema.DataBean.DataSchemaBean();
         //TODO 修改基础值
@@ -99,25 +100,26 @@ public class DirectServiceImpl implements DirectService {
     }
 
     @Override
-    public PageInfo<ChdDirect> chdDirectSelect(int page, int pageSize, ChdDirect chdDirect) {
-        PageInfo<ChdDirect> mainPageInfo = PageHelper.startPage(page, pageSize)
-                .doSelectPageInfo(() ->  this.directMapper.select(chdDirect));
+    public PageInfo<ChdClass> chdClassSelect(int page, int pageSize, ChdClass chdClass) {
+        PageInfo<ChdClass> mainPageInfo = PageHelper.startPage(page, pageSize)
+                .doSelectPageInfo(() ->  this.classMapper.select(chdClass));
         return mainPageInfo;
     }
 
+
     @Override
-    public ChdDirect chdDirectInsert(ChdDirect chdDirect) {
-        if(chdDirect.getDirectName()==null){
+    public ChdClass chdClasssInsert(ChdClass chdClass) {
+        if(chdClass.getMainId()==null && chdClass.getDirectId() == null){
             return null;
         }
         {
             int i = 0;//判断是否有的标示位
             //判断是否这个院中有这个系
             ChdMain chdMain1 = new ChdMain();
-            chdMain1.setCollegeId(chdDirect.getCollegeId());
+            chdMain1.setCollegeId(chdClass.getCollegeId());
             List<ChdMain> select1 = mainMapper.select(chdMain1);
             for (ChdMain chdMain : select1) {
-                if (Integer.valueOf(chdMain.getMainId()).intValue()  == Integer.valueOf(chdDirect.getMainId()).intValue() ){
+                if (Integer.valueOf(chdMain.getMainId()).intValue()  == Integer.valueOf(chdClass.getMainId()).intValue() ){
                     i = 1;
                 }
             }
@@ -129,30 +131,14 @@ public class DirectServiceImpl implements DirectService {
         Date date = new Date();
         String create = date.toString()+passwordGenerator.generateRandomPassword();
         //TODO 修改类名
-        chdDirect.setIsCreate(create);
-        List<ChdDirect> select = directMapper.select(chdDirect);
-        chdDirect.setDirectId(select.size()== 0 ? "1":select.size()+1+"");
-        int i = directMapper.insertSelective(chdDirect);
-        chdDirect = directMapper.selectOne(chdDirect);
+        chdClass.setIsCreate(create);
+        List<ChdClass> select = classMapper.select(chdClass);
+        //TODO 修改班级号
+        chdClass.setClassId(select.size()== 0 ? "1":select.size()+1+"");
+        int i = classMapper.insertSelective(chdClass);
+        chdClass = classMapper.selectOne(chdClass);
         //不要把创建用于查询的内部码发送出去
-        chdDirect.setIsCreate("yes");
-        return chdDirect;
+        chdClass.setIsCreate("yes");
+        return chdClass;
     }
-
-    @Override
-    public int chdDirectUpdate(String[] keys, ChdDirect chdDirect) {
-        int i = 0;
-        for (String key : keys) {
-            chdDirect.setIsCreate(key);
-            //TODO 记得修改类
-            Example e = new Example(ChdDirect.class);
-            e.createCriteria().andEqualTo("isCreate",key);
-            //TODO 记得修改mapper的类型
-            i += directMapper.updateByExampleSelective(chdDirect, e);
-        }
-        return i;
-    }
-
-
-
 }
