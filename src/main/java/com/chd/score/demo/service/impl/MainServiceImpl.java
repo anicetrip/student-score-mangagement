@@ -1,8 +1,12 @@
 package com.chd.score.demo.service.impl;
 
+import com.chd.score.demo.bean.ChdClass;
 import com.chd.score.demo.bean.ChdCollege;
+import com.chd.score.demo.bean.ChdDirect;
 import com.chd.score.demo.bean.ChdMain;
+import com.chd.score.demo.mapper.ClassMapper;
 import com.chd.score.demo.mapper.CollegeMapper;
+import com.chd.score.demo.mapper.DirectMapper;
 import com.chd.score.demo.mapper.MainMapper;
 import com.chd.score.demo.service.MainService;
 import com.chd.score.demo.webbean.Schema;
@@ -21,7 +25,10 @@ public class MainServiceImpl implements MainService {
     CollegeMapper collegeMapper;
     @Autowired
     MainMapper mainMapper;
-
+    @Autowired
+    ClassMapper classMapper;
+    @Autowired
+    DirectMapper directMapper;
 
     @Override
     public Schema chdMainSchema() {
@@ -99,7 +106,7 @@ public class MainServiceImpl implements MainService {
         int i = mainMapper.insertSelective(chdMain);
         chdMain = mainMapper.selectOne(chdMain);
         //不要把创建用于查询的内部码发送出去
-        chdMain.setIsCreate("yes");
+//        chdMain.setIsCreate("yes");
         return chdMain;
     }
 
@@ -112,6 +119,21 @@ public class MainServiceImpl implements MainService {
             Example e = new Example(ChdMain.class);
             e.createCriteria().andEqualTo("mainId",key);
             i += mainMapper.updateByExample(chdMain, e);
+        }
+        return i;
+    }
+
+    @Override
+    public int chdMainDelete(String[] keys) {
+        int i = 0;
+        for (String key : keys) {
+            ChdClass chdClass = new ChdClass();
+            chdClass.setMainId(key);
+            classMapper.delete(chdClass);
+            ChdDirect chdDirect = new ChdDirect();
+            chdDirect.setMainId(key);
+            directMapper.delete(chdDirect);
+            i += mainMapper.deleteByPrimaryKey(key);
         }
         return i;
     }

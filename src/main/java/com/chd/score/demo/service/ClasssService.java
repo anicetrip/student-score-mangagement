@@ -11,4 +11,8 @@ public interface ClasssService {
     ChdClass chdClasssInsert(ChdClass chdClass);
 
     PageInfo<ChdClass> chdClassSelect(int page, int pageSize, ChdClass chdClass);
+
+    int chdClassUpdate(String[] keys, ChdClass chdClass);
+
+    int chdClassDelete(String[] keys);
 }

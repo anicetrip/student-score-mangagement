@@ -104,4 +104,18 @@ public class CollegeController {
 
         return FastJsonTools.toJSONString(webStruct);
     }
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public String  chdCollegeDelete(String[] keys){
+        int i = collegeService.chdCollegeDelete(keys);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(i+"");
+        webStruct.setTotal(null);
+        return FastJsonTools.toJSONString(webStruct);
+    }
+
+
 }

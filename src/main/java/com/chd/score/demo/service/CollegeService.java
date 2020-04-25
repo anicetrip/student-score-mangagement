@@ -11,4 +11,6 @@ public interface CollegeService {
     ChdCollege chdCollegeInsert(String collegeName);
 
     int chdCollegeUpdate(String[] keys, String collegeName);
+
+    int chdCollegeDelete(String[] keys);
 }

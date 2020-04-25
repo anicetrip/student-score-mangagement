@@ -135,7 +135,7 @@ public class DirectServiceImpl implements DirectService {
         int i = directMapper.insertSelective(chdDirect);
         chdDirect = directMapper.selectOne(chdDirect);
         //不要把创建用于查询的内部码发送出去
-        chdDirect.setIsCreate("yes");
+//        chdDirect.setIsCreate("yes");
         return chdDirect;
     }
 
@@ -153,6 +153,14 @@ public class DirectServiceImpl implements DirectService {
         return i;
     }
 
+    @Override
+    public int chdDirectDelete(String[] keys) {
+        int i = 0;
+        for (String key : keys) {
+            i += directMapper.deleteByPrimaryKey(key);
+        }
+        return i;
+    }
 
 
 }

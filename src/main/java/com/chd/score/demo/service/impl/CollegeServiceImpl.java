@@ -1,7 +1,13 @@
 package com.chd.score.demo.service.impl;
 
+import com.chd.score.demo.bean.ChdClass;
 import com.chd.score.demo.bean.ChdCollege;
+import com.chd.score.demo.bean.ChdDirect;
+import com.chd.score.demo.bean.ChdMain;
+import com.chd.score.demo.mapper.ClassMapper;
 import com.chd.score.demo.mapper.CollegeMapper;
+import com.chd.score.demo.mapper.DirectMapper;
+import com.chd.score.demo.mapper.MainMapper;
 import com.chd.score.demo.service.CollegeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -18,6 +24,12 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Autowired
     CollegeMapper collegeMapper;
+    @Autowired
+    ClassMapper classMapper;
+    @Autowired
+    DirectMapper directMapper;
+    @Autowired
+    MainMapper mainMapper;
 
     @Override
     public PageInfo<ChdCollege> chdCollegeSelect(int page, int pageSize, String collegeId) {
@@ -42,7 +54,7 @@ public class CollegeServiceImpl implements CollegeService {
         chdCollege.setIsCreate(create);
         ChdCollege chdCollege1 = collegeMapper.selectOne(chdCollege);
         //不要把创建用于查询的内部码发送出去
-        chdCollege1.setIsCreate("yes");
+//        chdCollege1.setIsCreate("yes");
         return chdCollege1;
     }
 
@@ -57,6 +69,27 @@ public class CollegeServiceImpl implements CollegeService {
             Example e = new Example(ChdCollege.class);
             e.createCriteria().andEqualTo("collegeId",key);
             i += collegeMapper.updateByExampleSelective(chdCollege, e);
+        }
+        return i;
+    }
+
+    @Override
+    public int chdCollegeDelete(String[] keys) {
+        int i = 0;
+        for (String key : keys) {
+
+            ChdClass chdClass = new ChdClass();
+            chdClass.setCollegeId(key);
+            classMapper.delete(chdClass);
+
+            ChdDirect chdDirect = new ChdDirect();
+            chdDirect.setCollegeId(key);
+            directMapper.delete(chdDirect);
+
+            ChdMain chdMain = new ChdMain();
+            chdMain.setCollegeId(key);
+            mainMapper.delete(chdMain);
+            i += collegeMapper.deleteByPrimaryKey(key);
         }
         return i;
     }

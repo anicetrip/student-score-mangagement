@@ -84,19 +84,37 @@ public class ClasssController {
      * @param json
      * @return
      */
-//    @RequestMapping(value = "update", method = {RequestMethod.GET,RequestMethod.POST})
-//    @ResponseBody
-//    public String  chdDirectUpdate(@RequestParam("keys") String[] keys, @RequestBody String json){
-//        //解析json
-//        Map map = FastJsonTools.stringToCollect(json);
-//        ChdDirect chdDirect = new ChdDirect();
-//        chdDirect.setDirectName((String) map.get("directName"));
-//        int data = directService.chdDirectUpdate(keys,chdDirect);
-//        WebStruct webStruct = new WebStruct();
-//        webStruct.setSuccess(true);
-//        webStruct.setTotal(null);
-//        webStruct.setData(data+"");
-//        webStruct.setTotal(null);
-//        return FastJsonTools.toJSONString(webStruct);
-//    }
+    @RequestMapping(value = "update", method = {RequestMethod.GET,RequestMethod.POST})
+    @ResponseBody
+    public String  chdClassUpdate(@RequestParam("keys") String[] keys, @RequestBody String json){
+        //解析json
+        Map map = FastJsonTools.stringToCollect(json);
+        ChdClass chdClass = new ChdClass();
+        chdClass.setClassId((String) map.get("classId"));
+        chdClass.setCollegeId((String) map.get("collegeId"));
+        chdClass.setDirectId((String) map.get("directId"));
+        chdClass.setMainId((String) map.get("mainId"));
+
+        int data = classsService.chdClassUpdate(keys,chdClass);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(data+"");
+        webStruct.setTotal(null);
+        return FastJsonTools.toJSONString(webStruct);
+    }
+
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public String  chdClassDelete(String[] keys){
+        int i = classsService.chdClassDelete(keys);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(i+"");
+        webStruct.setTotal(null);
+        return FastJsonTools.toJSONString(webStruct);
+    }
+
 }

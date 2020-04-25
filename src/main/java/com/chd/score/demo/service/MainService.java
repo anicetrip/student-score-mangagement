@@ -14,4 +14,6 @@ public interface MainService {
     ChdMain chdMainInsert(ChdMain chdMain);
 
     int chdMainUpdate(String[] keys, ChdMain chdMain);
+
+    int chdMainDelete(String[] keys);
 }

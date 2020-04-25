@@ -12,4 +12,6 @@ public interface DirectService {
     ChdDirect chdDirectInsert(ChdDirect chdDirect);
 
     int chdDirectUpdate(String[] keys, ChdDirect chdDirect);
+
+    int chdDirectDelete(String[] keys);
 }

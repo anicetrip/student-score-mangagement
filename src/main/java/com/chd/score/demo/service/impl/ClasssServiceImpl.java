@@ -14,8 +14,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -107,6 +109,8 @@ public class ClasssServiceImpl implements ClasssService {
     }
 
 
+
+
     @Override
     public ChdClass chdClasssInsert(ChdClass chdClass) {
         if(chdClass.getMainId()==null && chdClass.getDirectId() == null){
@@ -128,17 +132,48 @@ public class ClasssServiceImpl implements ClasssService {
             }
         }
         PasswordGenerator passwordGenerator = new PasswordGenerator(8,8);
-        Date date = new Date();
-        String create = date.toString()+passwordGenerator.generateRandomPassword();
+        Calendar cal = Calendar.getInstance();
+        String create = cal.getTime()+passwordGenerator.generateRandomPassword();
         //TODO 修改类名
         chdClass.setIsCreate(create);
         List<ChdClass> select = classMapper.select(chdClass);
         //TODO 修改班级号
-        chdClass.setClassId(select.size()== 0 ? "1":select.size()+1+"");
+        String classId = select.size()== 0
+                ? cal.get(Calendar.YEAR)+chdClass.getCollegeId()+chdClass.getMainId()+"01"
+                :Integer.parseInt(select.get(select.size()-1).getClassId())+1+"";
+
+
+
+        chdClass.setClassId(classId);
+
+
         int i = classMapper.insertSelective(chdClass);
         chdClass = classMapper.selectOne(chdClass);
         //不要把创建用于查询的内部码发送出去
-        chdClass.setIsCreate("yes");
+//        chdClass.setIsCreate("yes");
         return chdClass;
     }
+    @Override
+    public int chdClassUpdate(String[] keys, ChdClass chdClass) {
+        int i = 0;
+        for (String key : keys) {
+            chdClass.setIsCreate(key);
+            //TODO 记得修改类
+            Example e = new Example(ChdClass.class);
+            e.createCriteria().andEqualTo("isCreate",key);
+            //TODO 记得修改mapper的类型
+            i += classMapper.updateByExampleSelective(chdClass, e);
+        }
+        return i;
+    }
+
+    @Override
+    public int chdClassDelete(String[] keys) {
+        int i = 0;
+        for (String key : keys) {
+             i += classMapper.deleteByPrimaryKey(key);
+        }
+        return i;
+    }
 }
+

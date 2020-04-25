@@ -105,4 +105,17 @@ public class DirectController {
         return FastJsonTools.toJSONString(webStruct);
 
     }
+
+    @RequestMapping("delete")
+    @ResponseBody
+    public String  chdDirectDelete(String[] keys){
+        int i = directService.chdDirectDelete(keys);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(i+"");
+        webStruct.setTotal(null);
+        return FastJsonTools.toJSONString(webStruct);
+    }
+
 }

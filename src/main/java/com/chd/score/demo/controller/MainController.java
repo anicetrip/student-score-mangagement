@@ -104,6 +104,17 @@ public class MainController {
         return FastJsonTools.toJSONString(webStruct);
     }
 
+    @RequestMapping("delete")
+    @ResponseBody
+    public String  chdMainDelete(String[] keys){
+        int i = mainService.chdMainDelete(keys);
+        WebStruct webStruct = new WebStruct();
+        webStruct.setSuccess(true);
+        webStruct.setTotal(null);
+        webStruct.setData(i+"");
+        webStruct.setTotal(null);
+        return FastJsonTools.toJSONString(webStruct);
+    }
 
 }
 
