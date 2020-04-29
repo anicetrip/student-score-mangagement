@@ -31,15 +31,9 @@ public class CollegeController {
     @RequestMapping("schema")
     @ResponseBody
     public WebStruct  chdCollegeSchema(){
-        String data = "  querySchema: [  // 可选，如果返回这个字段，说明服务端要更新querySchema\n" +
-                "           // 结构跟{tableName}.querySchema.js中定义的是完全一样的\n" +
-                "        ],\n" +
-                "        dataSchema: [  // 可选，如果返回这个字段，说明服务端要更新dataSchema\n" +
-                "           // 结构跟{tableName}.dataSchema.js完全一样\n" +
-                "        ],";
+
         WebStruct webStruct = new WebStruct();
         webStruct.setSuccess(true);
-        webStruct.setData(data);
         webStruct.setMessage("测试");
 //        System.out.println("post");
         return webStruct;

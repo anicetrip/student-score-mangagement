@@ -10,8 +10,6 @@ public class ChdLesson implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String isCreate;
-    @Column
     private String lessonId;
     @Column
     private String lessonName;

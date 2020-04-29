@@ -74,10 +74,6 @@ public class PasswordGenerator {
         }
         return c;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new PasswordGenerator(10, 3).generateRandomPassword());
-    }
 }
 
 enum CharactorType {

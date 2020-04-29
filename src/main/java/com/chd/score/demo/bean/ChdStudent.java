@@ -14,7 +14,7 @@ public class ChdStudent implements Serializable {
     @Column
     private String studentClassId;
     @Column
-    private String studnetSchoolId;
+    private String studentSchoolId;
     @Column
     private String studentName;
     @Column
@@ -44,16 +44,16 @@ public class ChdStudent implements Serializable {
         return studentClassId;
     }
 
-    public void setStudentClassId(String studentClass_id) {
+    public void setStudentClassId(String studentClassId) {
         this.studentClassId = studentClassId;
     }
 
-    public String getStudnetSchoolId() {
-        return studnetSchoolId;
+    public String getStudentSchoolId() {
+        return studentSchoolId;
     }
 
-    public void setStudnetSchoolId(String studnetSchoolId) {
-        this.studnetSchoolId = studnetSchoolId;
+    public void setStudentSchoolId(String studentSchoolId) {
+        this.studentSchoolId = studentSchoolId;
     }
 
     public String getStudentName() {
@@ -79,4 +79,5 @@ public class ChdStudent implements Serializable {
     public void setStudentOthers(String studentOthers) {
         this.studentOthers = studentOthers;
     }
+
 }

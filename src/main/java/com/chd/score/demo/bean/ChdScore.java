@@ -10,7 +10,7 @@ public class ChdScore implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private String isCreate;
     @Column
     private String classId;
     @Column
@@ -20,14 +20,16 @@ public class ChdScore implements Serializable {
     @Column
     private String teacherId;
     @Column
-    private String studentId;
+    private String lessonId;
+    @Column
+    private String score;
 
-    public String getId() {
-        return id;
+    public String getIsCreate() {
+        return isCreate;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIsCreate(String isCreate) {
+        this.isCreate = isCreate;
     }
 
     public String getClassId() {
@@ -62,11 +64,19 @@ public class ChdScore implements Serializable {
         this.teacherId = teacherId;
     }
 
-    public String getStudentId() {
-        return studentId;
+    public String getLessonId() {
+        return lessonId;
     }
 
-    public void setStudentId(String studentId) {
-        this.studentId = studentId;
+    public void setLessonId(String lessonId) {
+        this.lessonId = lessonId;
+    }
+
+    public String getScore() {
+        return score;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
     }
 }
